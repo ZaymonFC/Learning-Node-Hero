@@ -1,0 +1,15 @@
+{
+  "name": "chapter1",
+  "version": "1.0.0",
+  "description": "Chapter 1 of the node-hero tutorial series",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Zaymon Foulds-Cook",
+  "license": "ISC",
+  "dependencies": {
+    "readline": "^1.3.0"
+  }
+}
