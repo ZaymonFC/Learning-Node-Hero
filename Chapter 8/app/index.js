@@ -1,8 +1,8 @@
 const bodyParser = require('body-parser')
-const RedisStore = require('connect-redis')
+const session    = require('express-session')
+const RedisStore = require('connect-redis')(session)
 const express    = require('express')
 const exphbs     = require('express-handlebars')
-const session    = require('express-session')
 const passport   = require('passport')
 const path       = require('path')
 
@@ -17,7 +17,7 @@ require('./authentication').init(app)
 
 app.use(session({
     store: new RedisStore({
-        url: config.redisStore.url
+      url: config.redisStore.url
     }),
     secret: config.redisStore.secret,
     resave: false,
@@ -36,3 +36,8 @@ app.engine('.hbs', exphbs({
 
 app.set('view engine', '.hbs')
 app.set('views')
+
+require('./user').init(app)
+require('./note').init(app)
+
+module.exports = app

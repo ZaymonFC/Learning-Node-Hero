@@ -1,25 +1,47 @@
-import { request } from 'https';
+
+
+// const passport = require('passport')
+
+// const initUser = (app) => {
+//     app.get('/', renderWelcome)
+//     app.get('/profile', passport.authenticationMiddleware(), renderProfile)
+//     app.post('/login', passport.authenticate('local', {
+//         successRedirect: './profile',
+//         failure: '/'
+//     }))
+// }
+
+// const renderWelcome = (req, res) => {
+//     res.render('user/welcome')
+// }
+
+// const renderProfile = (req, res) => {
+//     res.render('user/profile', {
+//         username: req.user.username
+//     })
+// }
+
+// module.exports = initUser
 
 const passport = require('passport')
 
-const initUser = (app) => {
-    app.get('/', renderWelcome)
-    app.get('/profile', passport.authenticationMiddleware(), renderProfile)
-    app.post('/login', passport.authenticate('local', {
-        successRedirect: './profile',
-        failure: '/'
-    }))
+function initUser (app) {
+  app.get('/', renderWelcome)
+  app.get('/profile', passport.authenticationMiddleware(), renderProfile)
+  app.post('/login', passport.authenticate('local', {
+    successRedirect: '/profile',
+    failureRedirect: '/'
+  }))
 }
 
-const renderWelcome = (req, res) => {
-    res.render('user/welcome')
+function renderWelcome (req, res) {
+  res.render('user/welcome')
 }
 
-const renderProfile = (req, res) => {
-     res.render('user/profile', {
-         username: req.user.username
-     })
+function renderProfile (req, res) {
+  res.render('user/profile', {
+    username: req.user.username
+  })
 }
 
 module.exports = initUser
-
